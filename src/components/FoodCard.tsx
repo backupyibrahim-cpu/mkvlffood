@@ -16,7 +16,7 @@ const FoodCard = ({ item, index }: FoodCardProps) => {
   const { addToCart, items } = useCart();
   const { toast } = useToast();
   const [showCheck, setShowCheck] = useState(false);
-  
+
   const cartItem = items.find(i => i.id === item.id);
   const quantity = cartItem?.quantity || 0;
 
@@ -27,10 +27,10 @@ const FoodCard = ({ item, index }: FoodCardProps) => {
       price: item.price,
       image: item.image,
     });
-    
+
     setShowCheck(true);
     setTimeout(() => setShowCheck(false), 1000);
-    
+
     toast({
       title: "Added to cart! 🎉",
       description: `${item.name} has been added to your order.`,
@@ -52,17 +52,23 @@ const FoodCard = ({ item, index }: FoodCardProps) => {
             {/* Image Container */}
             <div className="relative aspect-square overflow-hidden bg-fastfood-cream">
               {/* Price Badge - Positioned on image */}
-              <div className="absolute bottom-3 left-3 z-10 bg-accent text-accent-foreground px-4 py-2 rounded-xl shadow-lg">
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAddToCart();
+                }}
+                className="absolute bottom-3 left-3 z-50 bg-accent text-accent-foreground px-4 py-2 rounded-xl shadow-lg cursor-pointer hover:scale-105 transition-transform active:scale-95"
+              >
                 <span className="text-xl font-bold">${item.price.toFixed(2)}</span>
               </div>
-              
+
               {/* Popular Badge */}
               {item.popular && (
-                <div className="absolute top-3 right-3 z-10 flex items-center gap-1 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
+                <div className="absolute top-3 right-3 z-40 flex items-center gap-1 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
                   🔥 Popular
                 </div>
               )}
-              
+
               <motion.img
                 src={item.image}
                 alt={item.name}
@@ -79,7 +85,7 @@ const FoodCard = ({ item, index }: FoodCardProps) => {
                   <h3 className="text-lg font-bold text-foreground mb-1">{item.name}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-2">{item.description}</p>
                 </div>
-                
+
                 {/* Animated Add Button */}
                 <motion.div className="relative" whileTap={{ scale: 0.9 }}>
                   <Button

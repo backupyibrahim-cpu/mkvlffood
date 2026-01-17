@@ -46,22 +46,22 @@ const Index = () => {
         activeSection={activeSection}
         onNavigate={handleNavigate}
       />
-      
+
       <HeroSection onOrderClick={scrollToMenu} />
-      
-      <div ref={menuRef}>
+
+      <div ref={menuRef} className="scroll-mt-24">
         <MenuSection />
       </div>
-      
+
       <DealsSection />
-      
+
       <Footer />
 
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
-      
-      <DiscountPopup 
+
+      <DiscountPopup
         onApply={handleDiscountApply}
-        onClose={() => {}}
+        onClose={() => { }}
       />
     </div>
   );
