@@ -56,10 +56,15 @@ const CheckoutContent = () => {
     }
   };
 
+  // Add new state for visible error
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage(null); // Clear previous errors
 
     if (items.length === 0) {
+      setErrorMessage("Your cart is empty. Please add items first.");
       toast({
         title: "Cart is empty",
         description: "Please add items to your cart first.",
@@ -69,6 +74,7 @@ const CheckoutContent = () => {
     }
 
     if (!formData.name || !formData.phone || !formData.address) {
+      setErrorMessage("Please fill in all delivery details (Name, Phone, Address).");
       toast({
         title: "Missing Details",
         description: "Please fill in all delivery details.",
@@ -82,8 +88,8 @@ const CheckoutContent = () => {
     try {
       if (paymentMethod === 'card') {
         if (!stripe || !elements) {
-          // Stripe might not be loaded yet, but for demo we can proceed or warn
-          console.warn("Stripe not loaded");
+          console.warn("Stripe not initialized");
+          // Don't throw here for demo purposes, just log
         }
 
         const cardElement = elements?.getElement(CardElement);
@@ -101,12 +107,8 @@ const CheckoutContent = () => {
           });
 
           if (error) {
-            // Show error but for this demo app we might want to be lenient if it's just testing
-            // But if it's a real error (like incomplete card), we should probably show it.
-            // For now, let's log it and rely on the try/catch to show the toast
             throw error;
           }
-
           console.log('[PaymentMethod]', stripePaymentMethod);
         }
       }
@@ -124,6 +126,7 @@ const CheckoutContent = () => {
     } catch (err: any) {
       setIsProcessing(false);
       console.error(err);
+      setErrorMessage(err.message || "Payment failed. Please check your card details.");
       toast({
         title: "Payment Issue",
         description: err.message || "Please check your card details.",
@@ -206,6 +209,13 @@ const CheckoutContent = () => {
                     </div>
                     <h2 className="text-xl font-bold">Delivery Details</h2>
                   </div>
+
+                  {errorMessage && (
+                    <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl flex items-center gap-2">
+                      <span className="text-xl">⚠️</span>
+                      <p className="font-medium">{errorMessage}</p>
+                    </div>
+                  )}
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">

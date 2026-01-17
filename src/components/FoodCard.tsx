@@ -61,11 +61,13 @@ const FoodCard = ({ item, index }: FoodCardProps) => {
 
               {/* Price Badge - Positioned on image */}
               <div
-                onClick={(e) => {
+                role="button"
+                onClickCapture={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   handleAddToCart();
                 }}
-                className="absolute bottom-3 left-3 z-50 bg-accent text-accent-foreground px-4 py-2 rounded-xl shadow-lg cursor-pointer hover:scale-105 transition-transform active:scale-95"
+                className="absolute bottom-3 left-3 z-50 bg-accent text-accent-foreground px-4 py-2 rounded-xl shadow-lg cursor-pointer hover:scale-105 transition-transform active:scale-95 pointer-events-auto"
               >
                 <span className="text-xl font-bold">${item.price.toFixed(2)}</span>
               </div>

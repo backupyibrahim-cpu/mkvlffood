@@ -39,11 +39,9 @@ const HeroSection = ({ onOrderClick }: HeroSectionProps) => {
             </motion.div>
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-              <span className="text-foreground">Taste the</span>
+              <span className="text-foreground">Fast Food Fun</span>
               <br />
-              <span className="text-gradient">Best Burgers</span>
-              <br />
-              <span className="text-foreground">in Town!</span>
+              <span className="text-gradient">Refuel (Updated)</span>
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg mx-auto lg:mx-0">
@@ -108,7 +106,7 @@ const HeroSection = ({ onOrderClick }: HeroSectionProps) => {
             <div className="relative">
               {/* Glow Effect */}
               <div className="absolute inset-0 bg-gradient-radial from-primary/30 via-transparent to-transparent blur-3xl scale-150"></div>
-              
+
               {/* Main Image */}
               <motion.img
                 src={burgerHero}
