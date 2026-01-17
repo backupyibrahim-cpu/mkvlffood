@@ -51,6 +51,14 @@ const FoodCard = ({ item, index }: FoodCardProps) => {
           <CardContent className="p-0">
             {/* Image Container */}
             <div className="relative aspect-square overflow-hidden bg-fastfood-cream">
+              <motion.img
+                src={item.image}
+                alt={item.name}
+                className="w-full h-full object-cover"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+              />
+
               {/* Price Badge - Positioned on image */}
               <div
                 onClick={(e) => {
@@ -68,14 +76,6 @@ const FoodCard = ({ item, index }: FoodCardProps) => {
                   🔥 Popular
                 </div>
               )}
-
-              <motion.img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-full object-cover"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.3 }}
-              />
             </div>
 
             {/* Content */}
