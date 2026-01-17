@@ -86,6 +86,15 @@ export const menuItems: MenuItem[] = [
     image: sundae,
     category: 'desserts',
   },
+  {
+    id: '9',
+    name: 'Dollar Value Snack',
+    description: 'A delicious snack for just a dollar!',
+    price: 1.00,
+    image: fries,
+    category: 'sides',
+    popular: true,
+  },
 ];
 
 export const categories = [
